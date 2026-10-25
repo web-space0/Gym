@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="violet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forgehouse | Premium gym: Build Strength. Build Confidence.</title>
+<meta name="description" content="Forgehouse is a premium gym with certified trainers, modern equipment, group classes and flexible memberships. Book a free trial today.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:title" content="Forgehouse | Build Strength. Build Confidence.">
+<meta property="og:description" content="Certified trainers, modern equipment and flexible memberships. Book a free trial.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%237C4DFF' stroke-width='3.2' stroke-dasharray='46 11' stroke-linecap='round' transform='rotate(-40 16 16)'/%3E%3Ccircle cx='13' cy='18.6' r='2.4' fill='%237C4DFF'/%3E%3C/svg%3E">
+<script>
+  document.documentElement.classList.add('js');
+  try{var t=localStorage.getItem('fh_theme'),a=localStorage.getItem('fh_acc');if(t)document.documentElement.setAttribute('data-theme',t);if(a)document.documentElement.setAttribute('data-accent',a)}catch(e){}
+  setTimeout(function(){document.documentElement.classList.add('ready')},9500);
+  setTimeout(function(){if(!document.documentElement.classList.contains('booted'))document.documentElement.classList.remove('js')},7000);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HealthClub","name":"Forgehouse","description":"Premium gym with certified trainers, modern equipment and group classes.","address":{"@type":"PostalAddress","streetAddress":"12 Iron Street, Your Area","addressLocality":"Your City"}}</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="fallbg" aria-hidden="true"></div>
+<canvas id="liquid" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<canvas id="gl3d" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="blob" id="blob" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="logo" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="58 14" stroke-linecap="round" transform="rotate(-40 16 16)"/><circle cx="12.2" cy="19.4" r="2.9" fill="currentColor"/></symbol>
+</defs></svg>
+
+<!-- Loader -->
+<svg class="wipe" id="wipe" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path id="wipePath" d="M0,0 H100 V100 H0 Z"/></svg>
+<div class="pre" id="pre" aria-hidden="true">
+  <div class="pre__bar" id="preBar"><span class="pre__rod"></span></div>
+  <div class="pre__num"><span id="preNum">0</span><small>%</small></div>
+  <p class="pre__txt" style="color:rgba(255,255,255,.66)">Loading the bar</p>
+</div>
+
+<!-- Announcement -->
+<div class="ann" id="ann" role="region" aria-label="Announcement"><span id="annTxt">New Zumba batch starts Monday. <a href="#classes">See the schedule</a></span><button type="button" id="annX" aria-label="Dismiss announcement"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+
+<!-- Navigation -->
+<header class="nav" id="nav">
+  <div class="nav__bar glass">
+    <a class="brand" href="#top" aria-label="Forgehouse, home"><svg aria-hidden="true"><use href="#logo"/></svg><span>FORGEHOUSE</span></a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="#about">About</a><a href="#facilities">Facilities</a><a href="#trainers">Trainers</a><a href="#plans">Plans</a><a href="#classes">Classes</a><a href="#workouts">Workouts</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="nav__end">
+      <div style="position:relative">
+        <button class="iconbtn" id="bellBtn" type="button" aria-label="Announcements" aria-expanded="false" aria-controls="bellPop"><svg class="ico" viewBox="0 0 24 24"><path d="M6 17h12l-1.5-2V11a4.5 4.5 0 0 0-9 0v4zM10 20a2 2 0 0 0 4 0"/></svg><span class="dot" id="bellDot"></span></button>
+        <div class="pop glass" id="bellPop" style="min-width:min(300px,86vw)"><h4>Announcements</h4><ul id="notes"></ul></div>
+      </div>
+      <div style="position:relative">
+        <button class="iconbtn" id="styleBtn" type="button" aria-label="Theme and accent colour" aria-expanded="false" aria-controls="stylePop"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <div class="pop" id="stylePop"><h4>Theme</h4><div class="seg glass" id="themeSeg" role="group" aria-label="Theme"><span class="seg__pill" aria-hidden="true"></span><button type="button" data-t="dark">Dark</button><button type="button" data-t="light">Light</button></div><h4 style="margin-top:1rem">Accent colour</h4><div class="sw" id="accSw" role="group" aria-label="Accent colour"></div></div>
+      </div>
+      <button class="iconbtn" id="memBtn" type="button" aria-label="Member login"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></button>
+      <button class="btn btn--fill nav__cta" type="button" data-open="join" data-magnet><span>Join Now</span></button>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" aria-hidden="true">
+  <a class="m" href="#about">About</a><a class="m" href="#facilities">Facilities</a><a class="m" href="#trainers">Trainers</a><a class="m" href="#plans">Membership</a><a class="m" href="#classes">Classes</a><a class="m" href="#gallery">Gallery</a><a class="m" href="#bmi">BMI calculator</a><a class="m" href="#workouts">Workouts</a><a class="m" href="#nutrition">Nutrition</a><a class="m" href="#contact">Contact</a>
+  <div class="menu__foot"><button class="btn btn--fill" type="button" data-open="join"><span>Join Now</span></button><button class="btn btn--ghost" type="button" data-open="trial"><span>Book a Free Trial</span></button></div>
+</div>
+
+<main id="main">
+<!-- Hero -->
+<section class="hero" id="top" aria-label="Welcome">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <h1 id="h1" aria-label="Build Strength. Build Confidence.">Build Strength. Build Confidence.</h1>
+      <p class="lead" data-in style="--d:500">Train with certified coaches, modern equipment and a plan built around you. Whether it's your first workout or your five-hundredth, there's a place for you here.</p>
+      <div class="hero__cta" data-in style="--d:650">
+        <button class="btn btn--fill" type="button" data-open="join" data-magnet><span>Join Now</span></button>
+        <button class="btn btn--ghost" type="button" data-open="trial" data-magnet><span>Book a Free Trial</span></button>
+      </div>
+      <dl class="stats" data-in style="--d:800">
+        <div class="stat"><dt class="sr">Years</dt><strong data-count="5" data-suf="+">0</strong><span>Years</span></div>
+        <div class="stat"><dt class="sr">Members</dt><strong data-count="1000" data-suf="+">0</strong><span>Members</span></div>
+        <div class="stat"><dt class="sr">Trainers</dt><strong data-count="10" data-suf="+">0</strong><span>Trainers</span></div>
+        <div class="stat"><dt class="sr">Equipment</dt><strong data-count="50" data-suf="+">0</strong><span>Equipment</span></div>
+      </dl>
+    </div>
+    <div class="hero__stage" data-in style="--d:400">
+      <div class="stage" id="heroStage" role="img" aria-label="Interactive 3D barbell. Drag to turn it."><div class="stage__halo"></div></div>
+      <div class="load" role="group" aria-label="Load the bar">
+        <button class="iconbtn" id="plMinus" type="button" aria-label="Remove a plate from each side"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+        <output id="plOut" aria-live="polite">Bar: 60 kg</output>
+        <button class="iconbtn" id="plPlus" type="button" aria-label="Add a plate to each side"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+      <p class="hint">Drag to turn the bar. Tap + to load more weight.</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee__track" id="mqTrack"></div></div>
+
+<!-- About -->
+<section class="sec" id="about" aria-labelledby="aboutH">
+  <div class="wrap about__grid">
+    <div class="about__story rv">
+      <div class="head" style="margin-bottom:1.4rem"><h2 id="aboutH">Why Forgehouse?</h2></div>
+      <p class="lead">We started with one idea: a serious gym shouldn't feel intimidating. So we built a place with proper equipment, honest coaching and a community that pushes you without pressuring you.</p>
+      <p>From strength and conditioning to yoga and group classes, everything here is designed to help you build habits that last, not just a few good weeks.</p>
+      <div class="mv">
+        <div class="glass"><h3>Our mission</h3><p>Make good training accessible, safe and enjoyable for everyone who walks in.</p></div>
+        <div class="glass"><h3>Our vision</h3><p>A fitter, stronger, more confident neighbourhood, one member at a time.</p></div>
+      </div>
+      <ul class="cert" aria-label="Certifications and achievements"><li>Certified trainers</li><li>First-aid trained staff</li><li>Member-first coaching</li></ul>
+    </div>
+    <div class="rv">
+      <div class="why glass">
+        <h3>Everything you need to stay consistent</h3>
+        <ul>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg><div>Modern equipment<span>Machines, racks and free weights for every level.</span></div></li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg><div>Certified trainers<span>Coaches who explain the why, not just the what.</span></div></li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg><div>Personalised programs<span>A plan matched to your goal, schedule and experience.</span></div></li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg><div>Clean and safe environment<span>Sanitised daily, with spotters and staff on the floor.</span></div></li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg><div>Flexible memberships<span>Monthly, quarterly or yearly. Pick what fits.</span></div></li>
+        </ul>
+      </div>
+      <div class="facts">
+        <div class="fact glass"><h4>Opening hours</h4><p data-bind="hours">Mon to Sat: 5:00 AM to 11:00 PM. Sun: 7:00 AM to 8:00 PM.</p></div>
+        <div class="fact glass"><h4>Location</h4><p data-bind="address">12 Iron Street, Your Area, Your City</p></div>
+        <div class="fact glass"><h4>Facilities</h4><p>Strength, cardio, free weights, functional training, yoga and more.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities -->
+<section class="sec" id="facilities" aria-labelledby="facH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="facH">Everything under one roof</h2><p class="lead">Ten spaces built around how people actually train, from heavy lifting to a post-workout shake.</p></div>
+    <div class="bento" id="bento"></div>
+  </div>
+</section>
+
+<!-- Equipment 3D -->
+<section class="sec" id="equipment" aria-labelledby="eqH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="eqH">Meet the gear in 3D</h2><p class="lead">Pick a piece of equipment and turn it with your finger or mouse.</p></div>
+    <div class="eq">
+      <div class="stage" id="eqStage" role="img" aria-label="Interactive 3D model of gym equipment. Drag to turn it."><div class="stage__halo"></div></div>
+      <div class="eq__info glass">
+        <div class="seg glass" id="eqSeg" role="tablist" aria-label="Equipment"><span class="seg__pill" aria-hidden="true"></span>
+          <button type="button" role="tab" data-m="barbell" class="on">Barbell</button><button type="button" role="tab" data-m="dumbbell">Dumbbell</button><button type="button" role="tab" data-m="kettlebell">Kettlebell</button><button type="button" role="tab" data-m="plate">Plate</button></div>
+        <h3 id="eqName">Olympic barbell</h3>
+        <p id="eqText"></p>
+        <dl id="eqSpec"></dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trainers -->
+<section class="sec" id="trainers" aria-labelledby="trH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="trH">Meet our trainers</h2><p class="lead">Certified coaches with different strengths. Swipe through and open a profile.</p></div>
+    <div class="rail" id="rail" tabindex="0" role="region" aria-label="Trainers. Scroll sideways."></div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section class="sec" id="plans" aria-labelledby="plH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="plH">Membership plans</h2><p class="lead">Simple plans with no surprises. Start small or commit for the year.</p></div>
+    <div class="plans" id="plansBox"></div>
+    <p class="note">Sample prices. Replace them with your own in the settings at the top of the script.</p>
+  </div>
+</section>
+
+<!-- Classes -->
+<section class="sec" id="classes" aria-labelledby="clH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="clH">Class schedule</h2><p class="lead">Pick a day to see what's on. Tap Book to reserve a spot.</p></div>
+    <div class="sch__top"><div class="seg glass" id="daySeg" role="tablist" aria-label="Day of the week"><span class="seg__pill" aria-hidden="true"></span></div></div>
+    <div class="slots" id="slots" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="sec" id="gallery" aria-labelledby="gaH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="gaH">Inside the club</h2><p class="lead">Equipment, coaches, events and members. Tap a tile to see it full screen.</p></div>
+    <div class="seg glass" id="galSeg" role="group" aria-label="Gallery category"><span class="seg__pill" aria-hidden="true"></span></div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="sec" id="reviews" aria-labelledby="rvH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="rvH">What members say</h2></div>
+    <div class="tst" id="tst" aria-roledescription="carousel" aria-label="Member reviews"><div class="tst__track" id="tstTrack"></div><div class="tst__dots" id="tstDots"></div></div>
+    <p class="note">Sample reviews. Replace them with real member feedback.</p>
+  </div>
+</section>
+
+<!-- BMI -->
+<section class="sec" id="bmi" aria-labelledby="bmiH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="bmiH">BMI calculator</h2><p class="lead">A quick way to see where you stand. Enter your details below.</p></div>
+    <div class="bmi">
+      <form class="card glass form" id="bmiForm" novalidate>
+        <div class="field field--full"><div class="seg glass" id="unitSeg" role="group" aria-label="Units"><span class="seg__pill" aria-hidden="true"></span><button type="button" data-u="m" class="on">Metric</button><button type="button" data-u="i">Imperial</button></div></div>
+        <div class="field"><label for="bH" id="bHL">Height (cm)</label><input class="input" id="bH" type="number" inputmode="decimal" min="50" max="260" step="0.1" placeholder="170"></div>
+        <div class="field"><label for="bW" id="bWL">Weight (kg)</label><input class="input" id="bW" type="number" inputmode="decimal" min="10" max="400" step="0.1" placeholder="70"></div>
+        <div class="field"><label for="bA">Age</label><input class="input" id="bA" type="number" inputmode="numeric" min="5" max="110" placeholder="28"></div>
+        <div class="field"><label for="bG">Gender</label><select class="input" id="bG"><option value="">Prefer not to say</option><option>Female</option><option>Male</option><option>Other</option></select></div>
+        <div class="field field--full"><button class="btn btn--fill" id="bCalc" type="button"><span>Calculate my BMI</span></button></div>
+        <p class="status field--full" id="bStatus" role="status"></p>
+      </form>
+      <div class="card glass">
+        <div class="gauge"><svg viewBox="0 0 200 120" aria-hidden="true"><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#5aa9ff"/><stop offset=".33" stop-color="#43d17a"/><stop offset=".66" stop-color="#ffb43a"/><stop offset="1" stop-color="#ff5a4a"/></linearGradient></defs>
+          <path d="M20,105 A80,80 0 0 1 180,105" fill="none" stroke="rgba(128,128,128,.25)" stroke-width="14" stroke-linecap="round"/>
+          <path d="M20,105 A80,80 0 0 1 180,105" fill="none" stroke="url(#gg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" id="gArc"/>
+          <g id="gNeedle" style="transform-origin:100px 105px;transform:rotate(-90deg);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)"><path d="M100,105 L100,36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="105" r="6" fill="currentColor"/></g></svg>
+          <div class="gauge__v"><b id="bVal">--</b><span id="bCat">Enter your details</span></div></div>
+        <p class="note" id="bRange" style="text-align:center">Your result will appear here.</p>
+        <p class="note">BMI is only a screening measure and isn't a diagnosis. It doesn't account for muscle mass, age or body type. Talk to a doctor or qualified health professional about your health.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Workouts -->
+<section class="sec" id="workouts" aria-labelledby="wkH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="wkH">Workout library</h2><p class="lead">Start with the basics. Choose a muscle group, then open an exercise for the cues.</p></div>
+    <div class="seg glass" id="wkSeg" role="tablist" aria-label="Muscle group"><span class="seg__pill" aria-hidden="true"></span></div>
+    <div class="wk" id="wk"></div>
+    <p class="note">General guidance only. Ask a trainer to check your form before you add heavy weight.</p>
+  </div>
+</section>
+
+<!-- Nutrition -->
+<section class="sec" id="nutrition" aria-labelledby="nuH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="nuH">Nutrition basics</h2><p class="lead">Tap a card to flip it. This is general education, not personal diet or medical advice.</p></div>
+    <div class="nut" id="nut"></div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="sec" id="contact" aria-labelledby="coH">
+  <div class="wrap">
+    <div class="head rv"><h2 id="coH">Visit us or say hello</h2></div>
+    <div class="contact">
+      <form class="card glass form" id="ctForm" novalidate>
+        <div class="field"><label for="cN">Your name</label><input class="input" id="cN" type="text" autocomplete="name"></div>
+        <div class="field"><label for="cP">Phone number</label><input class="input" id="cP" type="tel" inputmode="tel" autocomplete="tel"></div>
+        <div class="field field--full"><label for="cM">How can we help?</label><textarea class="input" id="cM" rows="4"></textarea></div>
+        <div class="field field--full" style="display:flex;flex-direction:row;flex-wrap:wrap;gap:.7rem"><button class="btn btn--fill" id="cWa" type="button"><span>Send on WhatsApp</span></button><button class="btn btn--ghost" id="cMail" type="button"><span>Send by email</span></button></div>
+        <p class="status field--full" id="cStatus" role="status"></p>
+      </form>
+      <div class="info">
+        <div class="mapbox"><iframe id="mapF" title="Map of the gym" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="btn btn--fill" id="mapA" href="#" target="_blank" rel="noopener"><span>Open in Maps</span></a></div>
+        <div class="card glass"><dl class="rows">
+          <div><dt>Address</dt><dd data-bind="address">12 Iron Street, Your Area, Your City</dd></div>
+          <div><dt>Phone</dt><dd><a data-bind="phone" data-href="tel" href="#">+91 99999 99999</a></dd></div>
+          <div><dt>Email</dt><dd><a data-bind="email" data-href="mail" href="#">hello@forgehouse.example</a></dd></div>
+          <div><dt>Hours</dt><dd data-bind="hours">Mon to Sat: 5:00 AM to 11:00 PM. Sun: 7:00 AM to 8:00 PM.</dd></div></dl>
+          <div class="soc"><a class="btn btn--ghost" data-href="wa" href="#" target="_blank" rel="noopener"><span>WhatsApp</span></a><a class="btn btn--ghost" data-href="ig" href="#" target="_blank" rel="noopener"><span>Instagram</span></a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__g">
+    <div><a class="brand" href="#top" style="margin-bottom:.8rem" aria-label="Forgehouse, home"><svg aria-hidden="true"><use href="#logo"/></svg><span>FORGEHOUSE</span></a><p data-bind="address">12 Iron Street, Your Area, Your City</p></div>
+    <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#facilities">Facilities</a></li><li><a href="#trainers">Trainers</a></li><li><a href="#plans">Membership</a></li><li><a href="#classes">Classes</a></li></ul></div>
+    <div><h4>More</h4><ul><li><a href="#gallery">Gallery</a></li><li><a href="#bmi">BMI calculator</a></li><li><a href="#workouts">Workouts</a></li><li><a href="#nutrition">Nutrition</a></li><li><a href="#contact">Contact</a></li></ul></div>
+  </div>
+  <small>&copy; <span id="year">2026</span> Forgehouse. All rights reserved.</small>
+</div></footer>
+
+<button class="totop" id="toTop" type="button" aria-label="Back to top"><svg class="r" viewBox="0 0 52 52" aria-hidden="true"><circle class="t" cx="26" cy="26" r="22.5"/><circle class="p" id="toTopRing" cx="26" cy="26" r="22.5"/></svg><svg class="ico a" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<nav class="bar" aria-label="Quick actions"><a data-href="tel" href="#"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call</a><a class="main" href="#plans">Join Now</a></nav>
+
+<!-- Assistant (demo) -->
+<div class="ai" id="ai">
+  <div class="ai__p" id="aiP" role="dialog" aria-label="Fitness assistant">
+    <div class="ai__h"><b>Fitness assistant</b><small>Demo assistant with ready-made answers. General guidance only, not medical advice.</small></div>
+    <div class="ai__m" id="aiM" aria-live="polite"></div>
+    <div class="ai__q" id="aiQ"></div>
+    <form class="ai__f" id="aiF"><label class="sr" for="aiI">Ask a question</label><input class="input" id="aiI" placeholder="Ask about training, plans, timings" autocomplete="off"><button class="btn btn--fill" type="submit"><span>Ask</span></button></form>
+  </div>
+  <button class="ai__fab" id="aiBtn" type="button" aria-label="Open fitness assistant" aria-expanded="false" aria-controls="aiP"><svg class="ico" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10h7"/></svg></button>
+</div>
+
+<!-- Modals -->
+<div class="modal" id="mTrial" role="dialog" aria-modal="true" aria-labelledby="mTrialH"><div class="modal__box">
+  <button class="iconbtn modal__x" type="button" data-close aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <h3 id="mTrialH">Book a free trial</h3><p>Pick a time and we'll get your session ready.</p>
+  <form class="form" id="trForm" style="margin-top:1.2rem" novalidate>
+    <div class="field"><label for="tN">Your name</label><input class="input" id="tN" autocomplete="name"></div>
+    <div class="field"><label for="tP">Phone number</label><input class="input" id="tP" type="tel" inputmode="tel" autocomplete="tel"></div>
+    <div class="field"><label for="tD">Date</label><input class="input" id="tD" type="date"></div>
+    <div class="field"><label for="tT">Time</label><select class="input" id="tT"><option>6:00 AM</option><option>8:00 AM</option><option>12:00 PM</option><option>5:00 PM</option><option>7:00 PM</option></select></div>
+    <div class="field field--full"><label for="tG">Your goal</label><select class="input" id="tG"><option>Build strength</option><option>Lose fat</option><option>Improve fitness</option><option>Learn the basics</option><option>Flexibility and mobility</option></select></div>
+    <div class="field field--full"><button class="btn btn--fill" id="tGo" type="button"><span>Book my free trial</span></button></div>
+    <p class="status field--full" id="tS" role="status"></p>
+  </form></div></div>
+<div class="modal" id="mJoin" role="dialog" aria-modal="true" aria-labelledby="mJoinH"><div class="modal__box">
+  <button class="iconbtn modal__x" type="button" data-close aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <h3 id="mJoinH">Join Forgehouse</h3><p>Choose a plan and send your details. We'll reply with the next steps.</p>
+  <form class="form" id="jnForm" style="margin-top:1.2rem" novalidate>
+    <div class="field"><label for="jN">Your name</label><input class="input" id="jN" autocomplete="name"></div>
+    <div class="field"><label for="jP">Phone number</label><input class="input" id="jP" type="tel" inputmode="tel" autocomplete="tel"></div>
+    <div class="field field--full"><label for="jPl">Plan</label><select class="input" id="jPl"></select></div>
+    <div class="field field--full"><button class="btn btn--fill" id="jGo" type="button"><span>Send my details</span></button></div>
+    <p class="status field--full" id="jS" role="status"></p>
+  </form></div></div>
+<div class="modal" id="mTr" role="dialog" aria-modal="true" aria-labelledby="mTrH"><div class="modal__box">
+  <button class="iconbtn modal__x" type="button" data-close aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div id="mTrBody"></div></div></div>
+<div class="modal" id="mMem" role="dialog" aria-modal="true" aria-labelledby="mMemH"><div class="modal__box">
+  <button class="iconbtn modal__x" type="button" data-close aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="pane" id="pLogin"><h3 id="mMemH">Member login</h3><p>Demo portal. Enter any name and phone number to see how the member dashboard works. Your data stays in this browser.</p>
+    <form class="form" id="lgForm" style="margin-top:1.2rem" novalidate><div class="field"><label for="lN">Your name</label><input class="input" id="lN" autocomplete="name"></div><div class="field"><label for="lP">Phone number</label><input class="input" id="lP" type="tel" inputmode="tel" autocomplete="tel"></div>
+    <div class="field field--full"><button class="btn btn--fill" id="lGo" type="button"><span>Open my dashboard</span></button></div><p class="status field--full" id="lS" role="status"></p></form></div>
+  <div class="pane" id="pDash" hidden></div></div></div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lb__btn lb__close" id="lbX" type="button" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="lb__stage" id="lbS"></div>
+  <div class="lb__bar"><button class="lb__btn" id="lbP" type="button" aria-label="Previous"><svg class="ico" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span id="lbC"></span><button class="lb__btn" id="lbN" type="button" aria-label="Next"><svg class="ico" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
